@@ -11,9 +11,11 @@ Step-by-Step 😯
 Детализирую только неочевидное
 
 • Создаем API application для своего кода: Strava API settings. Заполняем поля: website — https://www.strava.testapp.com, authorization callback domain — localhost, остальное — произвольно
+
 • Проверяем доступ к API на простом запросе к /api/v3/athlete с Bearer-токеном
 postman request 'https://www.strava.com/api/v3/athlete' \
   --header 'Authorization: Bearer YOURACCESSTOKEN'
+
 • Получаем временный OAuth-код через authorize endpoint со scope activity:read_all,activity:write
 https://www.strava.com/oauth/authorize
   ?client_id=YOURCLIENTID
@@ -21,6 +23,7 @@ https://www.strava.com/oauth/authorize
   &redirect_uri=http://localhost/exchange_token
   &approval_prompt=force
   &scope=activity:read_all,activity:write
+
 • Обмениваем code на refresh_token и access_token через OAuth token exchange
 postman request POST 'https://www.strava.com/oauth/token?client_id=YOURCLIENTID&client_secret=YOURCLIENTSECRET&code=AUTHORIZATIONCODE&grant_type=authorization_code' \
   --header 'Content-Type: application/json' \
